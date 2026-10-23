@@ -15,8 +15,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
-import com.muhammad_anas.backend_mart.config.AppProperties.Security.Jwt;
 import com.muhammad_anas.backend_mart.security.JwtAuthenticationFilter;
+import com.muhammad_anas.backend_mart.security.RestAccessDeniedHandler;
+import com.muhammad_anas.backend_mart.security.RestAuthenticationEntryPoint;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +29,8 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
     private final AppProperties appProperties;
+    private final RestAuthenticationEntryPoint authenticationEntryPoint;
+    private final RestAccessDeniedHandler accessDeniedHandler;
 
     @Bean 
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,6 +42,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(basePath + "/auth/**").permitAll()
                 .anyRequest().authenticated())
+            .exceptionHandling(ex -> 
+                ex.authenticationEntryPoint(authenticationEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler))
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }

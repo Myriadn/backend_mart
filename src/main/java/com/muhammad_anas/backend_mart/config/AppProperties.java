@@ -40,10 +40,10 @@ public class AppProperties {
     @Setter
     public static class Pagination {
         
-        @Min (1) 
+        @Min(1) 
         private int defaultPageSize = 20;
         
-        @Min (1) 
+        @Min(1) 
         private int maxPageSize = 100;
     }
 
@@ -58,7 +58,7 @@ public class AppProperties {
         public static class Jwt {
             
             @NotBlank 
-            @Size (min = 32)
+            @Size(min = 32)
             private String secret;
             
             @Min(60_000) 

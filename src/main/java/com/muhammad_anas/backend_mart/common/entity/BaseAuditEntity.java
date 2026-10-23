@@ -22,7 +22,7 @@ import lombok.Setter;
 public abstract class BaseAuditEntity {
 
     @CreatedDate 
-    @Column (nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
     private Instant createdAt;
 
     @CreatedBy 
