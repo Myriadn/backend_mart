@@ -20,6 +20,7 @@ import com.muhammad_anas.backend_mart.common.specification.SpecificationBuilder;
 import com.muhammad_anas.backend_mart.province.Province;
 import com.muhammad_anas.backend_mart.province.ProvinceRepository;
 import com.muhammad_anas.backend_mart.security.SecurityUtils;
+import com.muhammad_anas.backend_mart.store.StoreRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,9 +29,10 @@ import lombok.RequiredArgsConstructor;
 @Transactional(readOnly = true)
 public class BranchService {
     
-     private final BranchRepository branchRepository;
+    private final BranchRepository branchRepository;
     private final ProvinceRepository provinceRepository;
     private final AuditLogService auditLogService;
+    private final StoreRepository storeRepository;
 
     public PageResponse<BranchResponse> list(Long provinceId, String name,
                                              boolean includeInactive, Pageable pageable) {
@@ -93,6 +95,11 @@ public class BranchService {
     public void softDelete(Long id) {
         Branch branch = branchRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Branch", id));
+        
+        if (storeRepository.existsByBranchIdAndDeletedFalse(id)) {
+            throw new BusinessException(
+                    "Cannot delete branch with active stores. Deactivate or delete stores first.");
+        }
 
         Map<String, Object> oldSnapshot = BranchMapper.toAuditSnapshot(branch);
 
