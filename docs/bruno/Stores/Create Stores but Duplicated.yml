@@ -1,0 +1,31 @@
+info:
+  name: Create Stores but Duplicated
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{url}}/api/v1/stores"
+  body:
+    type: json
+    data: |-
+      {
+        "branchId": 33,
+        "code": "STR-001",
+        "name": "Duplikat"
+      }
+  auth:
+    type: bearer
+    token: "{{admin_token}}"
+
+runtime:
+  variables:
+    - name: admin_token
+      value: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc5MjgzMDM5NCwiZXhwIjoxNzkyOTE2Nzk0fQ.xHGC10fwjcU2G06JKU_9VRngJQjYOlOtAxEEujMlhnjuysr9IS-wkM7t694Lg1_pAR5m5E3TZVqi4pjfTmVTDA
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

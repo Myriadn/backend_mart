@@ -1,0 +1,31 @@
+info:
+  name: Update whitelist
+  type: http
+  seq: 8
+
+http:
+  method: PATCH
+  url: "{{url}}/api/v1/stores/{{id}}"
+  body:
+    type: json
+    data: |-
+      {
+        "whitelisted": true
+      }
+  auth:
+    type: bearer
+    token: "{{admin_token}}"
+
+runtime:
+  variables:
+    - name: admin_token
+      value: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc5MjgzMDYwNywiZXhwIjoxNzkyOTE3MDA3fQ.zhYmb2XVTYCDdiiaaaukK8fBS5I3wk6R76XHTOnmPIXxwNOnY0CcNQPJEPsMtWmRoKNidyjqqw3l93rz1-TNfQ
+    - name: id
+      value: "3"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

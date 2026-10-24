@@ -1,0 +1,25 @@
+info:
+  name: Get Stores By Id
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: "{{url}}/api/v1/stores/{{id}}"
+  auth:
+    type: bearer
+    token: "{{admin_token}}"
+
+runtime:
+  variables:
+    - name: admin_token
+      value: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc5MjgzMDM5NCwiZXhwIjoxNzkyOTE2Nzk0fQ.xHGC10fwjcU2G06JKU_9VRngJQjYOlOtAxEEujMlhnjuysr9IS-wkM7t694Lg1_pAR5m5E3TZVqi4pjfTmVTDA
+    - name: id
+      value: "7"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

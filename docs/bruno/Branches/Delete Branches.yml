@@ -1,0 +1,25 @@
+info:
+  name: Delete Branches
+  type: http
+  seq: 7
+
+http:
+  method: DELETE
+  url: "{{url}}/api/v1/branches/{{id}}"
+  auth:
+    type: bearer
+    token: "{{admin_token}}"
+
+runtime:
+  variables:
+    - name: admin_token
+      value: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc5MjgzMDYwNywiZXhwIjoxNzkyOTE3MDA3fQ.zhYmb2XVTYCDdiiaaaukK8fBS5I3wk6R76XHTOnmPIXxwNOnY0CcNQPJEPsMtWmRoKNidyjqqw3l93rz1-TNfQ
+    - name: id
+      value: "36"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

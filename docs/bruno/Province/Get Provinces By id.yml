@@ -1,0 +1,30 @@
+info:
+  name: Get Provinces By id
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{url}}/api/v1/provinces/{{id}}"
+  params:
+    - name: name
+      value: ""
+      type: query
+      disabled: true
+  auth:
+    type: bearer
+    token: "{{admin_token}}"
+
+runtime:
+  variables:
+    - name: admin_token
+      value: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc5MjgzMDM5NCwiZXhwIjoxNzkyOTE2Nzk0fQ.xHGC10fwjcU2G06JKU_9VRngJQjYOlOtAxEEujMlhnjuysr9IS-wkM7t694Lg1_pAR5m5E3TZVqi4pjfTmVTDA
+    - name: id
+      value: "6"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

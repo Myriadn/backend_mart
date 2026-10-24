@@ -1,0 +1,34 @@
+info:
+  name: Branch Update
+  type: http
+  seq: 6
+
+http:
+  method: PATCH
+  url: "{{url}}/api/v1/branches/{{id}}"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Mustika Jaya",
+        //"address": “Jl. TB Simatupang No. 5",
+          "phone": "021-9999999"
+        //"active": false
+      }
+  auth:
+    type: bearer
+    token: "{{admin_token}}"
+
+runtime:
+  variables:
+    - name: admin_token
+      value: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc5MjgzMDM5NCwiZXhwIjoxNzkyOTE2Nzk0fQ.xHGC10fwjcU2G06JKU_9VRngJQjYOlOtAxEEujMlhnjuysr9IS-wkM7t694Lg1_pAR5m5E3TZVqi4pjfTmVTDA
+    - name: id
+      value: "14"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

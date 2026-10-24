@@ -1,0 +1,29 @@
+info:
+  name: Patch Province
+  type: http
+  seq: 6
+
+http:
+  method: PATCH
+  url: "{{url}}/api/v1/provinces/7"
+  body:
+    type: json
+    data: |-
+      {
+        "name": "DKI Jakarta Raya"
+      }
+  auth:
+    type: bearer
+    token: "{{admin_token}}"
+
+runtime:
+  variables:
+    - name: admin_token
+      value: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc5MjgzMDYwNywiZXhwIjoxNzkyOTE3MDA3fQ.zhYmb2XVTYCDdiiaaaukK8fBS5I3wk6R76XHTOnmPIXxwNOnY0CcNQPJEPsMtWmRoKNidyjqqw3l93rz1-TNfQ
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

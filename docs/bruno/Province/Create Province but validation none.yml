@@ -1,0 +1,30 @@
+info:
+  name: Create Province but validation none
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{url}}/api/v1/provinces"
+  body:
+    type: json
+    data: |-
+      {
+        "code": "",
+        "name": ""
+      }
+  auth:
+    type: bearer
+    token: "{{admin_token}}"
+
+runtime:
+  variables:
+    - name: admin_token
+      value: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc5MjgzMDYwNywiZXhwIjoxNzkyOTE3MDA3fQ.zhYmb2XVTYCDdiiaaaukK8fBS5I3wk6R76XHTOnmPIXxwNOnY0CcNQPJEPsMtWmRoKNidyjqqw3l93rz1-TNfQ
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

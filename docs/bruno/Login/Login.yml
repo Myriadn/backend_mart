@@ -1,0 +1,37 @@
+info:
+  name: Login
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/api/v1/auth/login"
+  body:
+    type: json
+    data: |-
+      {
+        "username": "admin",
+        "password": "admin123"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Parse response JSON
+        const body = res.getBody();
+
+        // Cek apakah request berhasil dan data accessToken ada
+        if (res && body.data && body.data.accessToken) {
+            // Simpan token ke environment variable Bruno
+            bru.setEnvVar("admin_token", body.data.accessToken);
+            console.log("Token saved to admin_token!");
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

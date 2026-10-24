@@ -1,0 +1,31 @@
+info:
+  name: Create Branches w/ ProvinceId unexist
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{url}}/api/v1/branches"
+  body:
+    type: json
+    data: |-
+      {
+        "provinceId": 999999,
+        "code": "JKT-99",
+        "name": "Test"
+      }
+  auth:
+    type: bearer
+    token: "{{admin_token}}"
+
+runtime:
+  variables:
+    - name: admin_token
+      value: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc5MjgzMDM5NCwiZXhwIjoxNzkyOTE2Nzk0fQ.xHGC10fwjcU2G06JKU_9VRngJQjYOlOtAxEEujMlhnjuysr9IS-wkM7t694Lg1_pAR5m5E3TZVqi4pjfTmVTDA
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
