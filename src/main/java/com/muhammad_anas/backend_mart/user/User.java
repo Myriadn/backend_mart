@@ -14,7 +14,7 @@ import lombok.Setter;
 @Entity 
 @Getter 
 @Setter 
-@Table (name = "users")
+@Table(name = "users")
 public class User extends BaseAuditEntity {
 
     @Id 

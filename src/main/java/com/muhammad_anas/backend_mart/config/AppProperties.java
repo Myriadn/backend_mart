@@ -71,4 +71,22 @@ public class AppProperties {
     public static class Audit {
         private boolean enabled = true;
     }
+
+    @Valid
+    private Bootstrap bootstrap = new Bootstrap();
+
+    @Getter
+    @Setter
+    public static class Bootstrap {
+        @Valid
+        private Admin admin = new Admin();
+
+        @Getter
+        @Setter
+        public static class Admin {
+            private boolean enabled = false;
+            private String username = "admin";
+            private String password = "admin123";
+        }
+    }
 }

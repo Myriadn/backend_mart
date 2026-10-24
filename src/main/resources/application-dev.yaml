@@ -11,4 +11,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-    
+
+app:
+  bootstrap:
+    admin:
+      enabled: true
+      username: ${ADMIN_USERNAME:admin}
+      password: ${ADMIN_PASSWORD:admin123}
