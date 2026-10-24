@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.muhammad_anas.backend_mart.audit.AuditLogService;
+import com.muhammad_anas.backend_mart.branch.BranchRepository;
 import com.muhammad_anas.backend_mart.common.api.PageResponse;
 import com.muhammad_anas.backend_mart.common.exception.BusinessException;
 import com.muhammad_anas.backend_mart.common.exception.ResourceNotFoundException;
@@ -28,6 +29,7 @@ public class ProvinceService {
     
     private final ProvinceRepository provinceRepository;
     private final AuditLogService auditLogService;
+    private final BranchRepository branchRepository;
 
     public PageResponse<ProvinceResponse> list(String name, boolean includeInactive, Pageable pageable) {
         Specification<Province> spec = SpecificationBuilder.notDeleted();
@@ -83,6 +85,11 @@ public class ProvinceService {
     public void softDelete(Long id) {
         Province province = provinceRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Province", id));
+        
+        if (branchRepository.existsByProvinceIdAndDeletedFalse(id)) {
+            throw new BusinessException(
+                "Cannot delete province with active branches. Deactivate or delete branches first.");
+        }
 
         Map<String, Object> oldSnapshot = ProvinceMapper.toAuditSnapshot(province);
 
